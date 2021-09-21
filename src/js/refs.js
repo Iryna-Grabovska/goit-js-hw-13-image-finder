@@ -4,4 +4,4 @@ export default function getRefs() {
     btnSearch: document.querySelector('.js-btn'),
     loadMoreBtn: document.querySelector('.js-load-more'),
   }
-}
+};
