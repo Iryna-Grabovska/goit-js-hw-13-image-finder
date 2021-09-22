@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,KACE,wBAAmC,CACnC,aAAkB,CAClB,WAAY,CACZ,kBACF","file":"styles.883d1217.css","sourceRoot":"../src","sourcesContent":[".btn {\n  background-color: rgb(67, 180, 224);\n  color: floralwhite;\n  border: none;\n  border-radius: 15px;\n}\n"]}
