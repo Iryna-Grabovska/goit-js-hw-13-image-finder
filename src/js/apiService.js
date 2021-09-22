@@ -14,7 +14,7 @@ const KEY = '23459982-aeff0c389b47d03a141af0a17';
         .then(data =>
       {
           this.incrementPage();
-          return data.photo;
+          return data.hits;
       })
     };
     incrementPage() {
@@ -23,11 +23,11 @@ const KEY = '23459982-aeff0c389b47d03a141af0a17';
     resetPage() {
       this.page = 1;
     }
-// get query(){
-//  return searchQuery;
-//     };
-// set query(newQuery){
-//  this.searchQuery = newQuery;
-//     };
+get query(){
+ return searchQuery;
+    };
+set query(newQuery){
+ this.searchQuery = newQuery;
+    };
 }
   

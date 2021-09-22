@@ -21,12 +21,12 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 function onSearch(e) {
   
   e.preventDefault();
-  newApiService.searchQuery =  e.currentTarget.elements.searchQuery.value;
+  newApiService.searchQuery =  e.currentTarget.elements.query.value;
   
   newApiService.resetPage();
   newApiService.fetchApiServise().then(photoCard => {
     clearGalleryList();
-    photoCardsMarkup(photoCard)
+    photoCardsMarkup(photoCard);
   });
 }
 function onLoadMore() {
