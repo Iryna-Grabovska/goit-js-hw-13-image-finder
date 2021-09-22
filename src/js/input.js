@@ -13,26 +13,27 @@
   import NewApiService from "./apiService";
   import getRefs from './refs';
   const refs = getRefs();
-  const newApiService = new NewApiService;
-console.log(refs.searchForm);
+const newApiService = new NewApiService;
+console.log(refs.galleryList);
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
+
   e.preventDefault();
-  newApiService.searchQuery = e.currenttarget.elements.searchQuery.value;
+   newApiService.searchQuery = e.target.value;
   
   newApiService.resetPage();
-  newApiService.fetchApiServise(newApiService).then(photoCard => {
+  newApiService.fetchApiServise().then(photoCard => {
     clearGalleryList();
-    photocardsMarkup(photoCard)
+    photoCardsMarkup(photoCard)
   });
 }
 function onLoadMore() {
-  newApiService.fetchApiServise(newApiService).then(photocardsMarkup);
+  newApiService.fetchApiServise(newApiService).then(photoCardsMarkup);
 }
-function photocardsMarkup(photoCard) {
-  refs.galleryList.insertAdjacentHTML('beforeend', photoCardTpl(photoCard))
+function photoCardsMarkup(photoCard) {
+  refs.galleryList.insertAdjacentHTML('', photoCardTpl(photoCard))
 }
 function clearGalleryList() {
   refs.galleryList.innerHTML = '';
