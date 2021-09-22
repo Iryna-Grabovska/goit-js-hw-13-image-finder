@@ -19,9 +19,9 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
-
+  
   e.preventDefault();
-   newApiService.searchQuery = e.target.value;
+  newApiService.searchQuery =  e.currentTarget.elements.searchQuery.value;
   
   newApiService.resetPage();
   newApiService.fetchApiServise().then(photoCard => {
@@ -33,7 +33,7 @@ function onLoadMore() {
   newApiService.fetchApiServise(newApiService).then(photoCardsMarkup);
 }
 function photoCardsMarkup(photoCard) {
-  refs.galleryList.insertAdjacentHTML('', photoCardTpl(photoCard))
+  refs.galleryList.insertAdjacentHTML('beforeend', photoCardTpl(photoCard))
 }
 function clearGalleryList() {
   refs.galleryList.innerHTML = '';
