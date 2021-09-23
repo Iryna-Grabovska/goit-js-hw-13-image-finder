@@ -39,3 +39,8 @@ body {
   height: 300px;
   object-fit: cover;
 }
+.stats {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}

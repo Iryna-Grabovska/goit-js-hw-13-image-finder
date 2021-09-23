@@ -27,10 +27,6 @@ function onSearch(e) {
   
   newApiService.resetPage();
   newApiService.fetchApiServise().then(photoCard => {
-    if (data.hits.length< newApiService.per_page) {
-           return     error({ text: 'Error! Please enter a more  query!' });
-
-    }
     clearGalleryList();
     photoCardsMarkup(photoCard);
   });
@@ -44,3 +40,7 @@ function photoCardsMarkup(photoCard) {
 function clearGalleryList() {
   refs.galleryList.innerHTML = '';
 }
+// if (data.hits.length< newApiService.per_page) {
+//        return     error({ text: 'Error! Please enter a more  query!' });
+
+// }
