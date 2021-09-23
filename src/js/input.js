@@ -1,9 +1,9 @@
-// import { error, defaultModules } from "@pnotify/core/dist/PNotify.js";
-// import * as PNotifyMobile from "@pnotify/mobile/dist/PNotifyMobile.js";
-// import '@pnotify/core/dist/PNotify.css';
-// import '@pnotify/core/dist/BrightTheme.css';
-// defaultModules.set(PNotifyMobile, {});
-//  const element = document.getElementById('.my-element-selector');
+import { error, defaultModules } from "@pnotify/core/dist/PNotify.js";
+import * as PNotifyMobile from "@pnotify/mobile/dist/PNotifyMobile.js";
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+defaultModules.set(PNotifyMobile, {});
+ const element = document.getElementById('.my-element-selector');
 // element.scrollIntoView({
   //   behavior: 'smooth',
   //   block: 'end',
@@ -22,9 +22,15 @@ function onSearch(e) {
   
   e.preventDefault();
   newApiService.searchQuery =  e.currentTarget.elements.query.value;
+    // return     error({ text: 'Error! Please enter a more  query!' });
+
   
   newApiService.resetPage();
   newApiService.fetchApiServise().then(photoCard => {
+    if (data.hits.length< newApiService.per_page) {
+           return     error({ text: 'Error! Please enter a more  query!' });
+
+    }
     clearGalleryList();
     photoCardsMarkup(photoCard);
   });

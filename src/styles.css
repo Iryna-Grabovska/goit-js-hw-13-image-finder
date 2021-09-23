@@ -23,3 +23,19 @@ body {
 .btn :focus {
   background-color: rgb(59, 71, 241);
 }
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+  width: 100%;
+  padding: 0;
+}
+.photo-card {
+  margin: 10px;
+  flex-basis: calc((100% - 20px * 3) / 3);
+}
+.img-list {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
