@@ -17,27 +17,31 @@ const newApiService = new NewApiService;
 console.log(refs.galleryList);
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+         refs.loadMoreBtn.style.display= "none";
 
 function onSearch(e) {
   e.preventDefault();
+
   newApiService.searchQuery =  e.currentTarget.elements.query.value;
   newApiService.resetPage();
   newApiService.fetchApiServise().then(photoCard => {
-console.log(photoCard)
+console.log(photoCard.length)
     clearGalleryList();
     
     photoCardsMarkup(photoCard);
      if(!photoCard.length )  {
-       
-       refs.loadMoreBtn.style.display= "none";
-     return  error({ text: 'Error! Please enter a more  query!' });
+            return  error({ text: 'Error! Please enter a more  query!' });
     }
-    if ( photoCard )
+    if (photoCard.length > 1 && photoCard.length <= 11) {
+
+     return success({ text: 'Hooray! We found images for you!' });
+     }
+    if (photoCard.length >= 12 )
     {
-      return success({ text: 'Hooray! We found images for you!' });
+      refs.loadMoreBtn.style.display= "";
+     return success({ text: 'Hooray! We found images for you!' });
 
     }
-
   }
   )
 }
@@ -52,14 +56,3 @@ function photoCardsMarkup(photoCard) {
 function clearGalleryList() {
   refs.galleryList.innerHTML = '';
 }
-// if(data.hits )
-//     {
-//           refs.loadMoreBtn.style.display = "none";
-//             return success({ text: 'oops' });
-
-
-//      }
-    //  }
-    // if (photoCard.length !== newApiService.searchQuery) {
-    //   return success({ text: 'Hooray! We found images for you!' });
-    // }
