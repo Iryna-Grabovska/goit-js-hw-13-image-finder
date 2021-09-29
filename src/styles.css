@@ -62,3 +62,9 @@ body {
   justify-content: space-around;
   color: rgb(112, 175, 95);
 }
+/* .basicLightbox {
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  transition-duration: 4s;
+  transition-timing-function: ease;
+} */
