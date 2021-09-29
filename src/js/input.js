@@ -9,9 +9,7 @@ import NewApiService from "./apiService";
 import getRefs from './refs';
 const refs = getRefs();
 const newApiService = new NewApiService;
-const instance = basicLightbox.create(
-  document.querySelector('.js-gallery')
-  )
+
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 refs.loadMoreBtn.style.display= "none";
@@ -20,6 +18,9 @@ function onSearch(e) {
   e.preventDefault();
    newApiService.searchQuery =  e.currentTarget.elements.query.value;
   newApiService.resetPage();
+  const instance = basicLightbox.create(
+  document.querySelector('.js-gallery')
+  )
   instance.show();
   newApiService.fetchApiServise().then(photoCard => {
     clearGalleryList();
