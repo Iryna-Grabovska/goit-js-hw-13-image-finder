@@ -4,10 +4,15 @@ import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 defaultModules.set(PNotifyMobile, {});
 import photoCardTpl from '../templates/photoCard.hbs';
-import * as basicLightbox from 'basiclightbox'
 import NewApiService from "./apiService";
 import getRefs from './refs';
 const refs = getRefs();
+import * as basicLightbox from 'basiclightbox'
+
+const instance = basicLightbox.create(
+  document.querySelector('.js-gallery')
+  )
+  console.log(instance)
 const newApiService = new NewApiService;
 
 refs.searchForm.addEventListener('submit', onSearch);
@@ -16,15 +21,12 @@ refs.loadMoreBtn.style.display= "none";
 
 function onSearch(e) {
   e.preventDefault();
-   newApiService.searchQuery =  e.currentTarget.elements.query.value;
+  newApiService.searchQuery =  e.currentTarget.elements.query.value;
   newApiService.resetPage();
-  const instance = basicLightbox.create(
-  document.querySelector('.js-gallery')
-  )
-  instance.show();
   newApiService.fetchApiServise().then(photoCard => {
     clearGalleryList();
     photoCardsMarkup(photoCard);
+    instance.show();
 
     if(!photoCard.length )  {
       return  error({ text: 'Error! Please enter a more  query!' });
