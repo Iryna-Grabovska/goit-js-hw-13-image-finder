@@ -9,15 +9,12 @@ import getRefs from './refs';
 const refs = getRefs();
 import * as basicLightbox from 'basiclightbox'
 
-const instance = basicLightbox.create(
-  document.querySelector('.js-gallery')
-  )
-  console.log(instance)
 const newApiService = new NewApiService;
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 refs.loadMoreBtn.style.display= "none";
+ 
 
 function onSearch(e) {
   e.preventDefault();
@@ -26,14 +23,17 @@ function onSearch(e) {
   newApiService.fetchApiServise().then(photoCard => {
     clearGalleryList();
     photoCardsMarkup(photoCard);
-    instance.show();
-
+    const instance = basicLightbox.create(
+      `<a href="{{largeImageURL}}">
+    <img class="img-list" src="{{webformatURL}}" data-large="{{largeImageURL}}" alt=""  />
+  </a>`
+    );
+      instance.show();
+  
     if(!photoCard.length )  {
       return  error({ text: 'Error! Please enter a more  query!' });
     }
-    if (photoCard.length > 1 && photoCard.length <= 11) {
-      instance.show();
-      
+    if (photoCard.length > 1 && photoCard.length <= 11) {      
       return success({ text: 'Hooray! We found images for you!' });
     }
     if (photoCard.length >= 12 )
@@ -41,8 +41,8 @@ function onSearch(e) {
       refs.loadMoreBtn.style.display= "";
       return success({ text: 'Hooray! We found images for you!' }); 
     }
-   }
-  )
+  }
+  ).catch(searchError)
 }
 function onLoadMore() {
   newApiService.fetchApiServise(newApiService).then(photoCard => {
@@ -51,11 +51,17 @@ function onLoadMore() {
 }
 function photoCardsMarkup(photoCard) {
   refs.galleryList.insertAdjacentHTML('beforeend', photoCardTpl(photoCard))
+ 
 }
 function clearGalleryList() {
   refs.galleryList.innerHTML = '';
 }
+function searchError(err) {
+  if (err.message === '404') {
+    error({ text: 'Please enter a more specific query!' });
+  }
 
+}
 //const element = document.getElementById('.my-element-selector');
 // element.scrollIntoView({
  //   behavior: 'smooth',

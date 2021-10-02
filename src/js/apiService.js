@@ -6,7 +6,6 @@ const KEY = '23459982-aeff0c389b47d03a141af0a17';
  this.searchQuery = '';
       this.page = 1;
       this.limit = 12;
-      console.log(this.limit)
     }
     fetchApiServise() {
       const url = `${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=${this.limit}&key=${KEY}`;
